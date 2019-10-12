@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.js.mapper.boardMapper">
+	<select id="JapanList" resultType="com.inhatc.vo.BoardVO">
+		<![CDATA[
+		select p_no, p_name, p_price, p_amount, p_picture, p_category
+		from mall_product
+		where p_category = 1
+		order by p_no desc
+		]]>
+	</select>
+	
+	<select id="ChinaList" resultType="com.inhatc.vo.BoardVO">
+		<![CDATA[
+		select p_no, p_name, p_price, p_amount, p_picture, p_category
+		from mall_product
+		where p_category = 2
+		order by p_no desc
+		]]>
+	</select>
+	
+	<select id="UsaList" resultType="com.inhatc.vo.BoardVO">
+		<![CDATA[
+		select p_no, p_name, p_price, p_amount, p_picture, p_category
+		from mall_product
+		where p_category = 3
+		order by p_no desc
+		]]>
+	</select>
+
+	<insert id="InsertBoard">
+		insert into mall_product(p_picture)
+		values
+		(#{filename})
+	</insert>
+
+	<update id="InsertDetail">
+		update mall_product
+		set p_name = #{p_name}, p_price = #{p_price}, p_amount = #{p_amount},
+		p_category = #{p_category}, p_detail = #{p_detail}
+		where p_picture = #{p_picture}
+	</update>
+	
+	<select id="DetailBoard" resultType="com.inhatc.vo.BoardVO">
+		select * from mall_product
+		where p_no = #{p_no}
+	</select>
+</mapper>
